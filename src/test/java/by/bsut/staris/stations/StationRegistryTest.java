@@ -38,5 +38,14 @@ class StationRegistryTest {
         assertTrue(registry.all().stream().allMatch(station -> station.distanceFromGomelKm() >= 0));
     }
 
+    @Test
+    @DisplayName("Гомель-Сортировочный: сортировочная станция Жлобинского направления, 2 км")
+    void containsGomelSorting() {
+        Station gomel = station("Гомель-Сортировочный");
+        assertEquals(Line.GOMEL_ZHLOBIN, gomel.line());
+        assertEquals(StationType.MARSHALLING, gomel.type());
+        assertEquals(2, gomel.distanceFromGomelKm());
+    }
+
     // тесты новых станций и методов добавляются в конец класса
 }
