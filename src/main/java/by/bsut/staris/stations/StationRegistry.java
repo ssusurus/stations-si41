@@ -6,7 +6,8 @@ import java.util.List;
 public final class StationRegistry {
 
     private final List<Station> stations = List.of(
-        new Station("Гомель-Пассажирский", Line.GOMEL_ZHLOBIN, StationType.PASSENGER, 0)
+        new Station("Гомель-Пассажирский", Line.GOMEL_ZHLOBIN, StationType.PASSENGER, 0),
+        new Station ("Костюковка", Line.GOMEL_ZHLOBIN, StationType.INTERMEDIATE, 12)
         // новые станции добавляются в конец списка
     );
 
