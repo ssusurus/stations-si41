@@ -38,5 +38,12 @@ class StationRegistryTest {
         assertTrue(registry.all().stream().allMatch(station -> station.distanceFromGomelKm() >= 0));
     }
 
+    @Test
+    @DisplayName("Справочник содержит станцию Костюковка с 12-и километровым расстоянием")
+    void containsKostyukovka() {
+        Station kostyukovka = station("Костюковка");
+        assertEquals(StationType.INTERMEDIATE, kostyukovka.type());
+        assertEquals(12, kostyukovka.distanceFromGomelKm());
+    }
     // тесты новых станций и методов добавляются в конец класса
 }
