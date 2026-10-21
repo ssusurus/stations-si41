@@ -38,6 +38,18 @@ class StationRegistryTest {
         assertTrue(registry.all().stream().allMatch(station -> station.distanceFromGomelKm() >= 0));
     }
 
+
+        @Test
+    @DisplayName("Справочник содержит станцию Ельск с корректными атрибутами")
+    void containsElsk() {
+        Station elsk = station("Ельск");
+        assertEquals(StationType.FREIGHT, elsk.type());
+        
+        assertEquals(165, elsk.distanceFromGomelKm());
+    
+        assertEquals(Line.GOMEL_ELSK, elsk.line());
+    }
+
     @Test
     @DisplayName("Справочник содержит станцию Костюковка с 12-и километровым расстоянием")
     void containsKostyukovka() {
