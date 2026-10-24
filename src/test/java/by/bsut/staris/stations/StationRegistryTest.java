@@ -38,15 +38,23 @@ class StationRegistryTest {
         assertTrue(registry.all().stream().allMatch(station -> station.distanceFromGomelKm() >= 0));
     }
 
+    @Test
+    @DisplayName("Гомель-Сортировочный: сортировочная станция Жлобинского направления, 2 км")
+    void containsGomelSorting() {
+        Station gomel = station("Гомель-Сортировочный");
+        assertEquals(Line.GOMEL_ZHLOBIN, gomel.line());
+        assertEquals(StationType.MARSHALLING, gomel.type());
+        assertEquals(2, gomel.distanceFromGomelKm());
+    }
 
-        @Test
+    @Test
     @DisplayName("Справочник содержит станцию Ельск с корректными атрибутами")
     void containsElsk() {
         Station elsk = station("Ельск");
         assertEquals(StationType.FREIGHT, elsk.type());
-        
+
         assertEquals(165, elsk.distanceFromGomelKm());
-    
+
         assertEquals(Line.GOMEL_ELSK, elsk.line());
     }
 
