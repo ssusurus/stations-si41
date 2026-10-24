@@ -47,5 +47,23 @@ class StationRegistryTest {
         assertEquals(2, gomel.distanceFromGomelKm());
     }
 
+    @Test
+    @DisplayName("Справочник содержит станцию Ельск с корректными атрибутами")
+    void containsElsk() {
+        Station elsk = station("Ельск");
+        assertEquals(StationType.FREIGHT, elsk.type());
+
+        assertEquals(165, elsk.distanceFromGomelKm());
+
+        assertEquals(Line.GOMEL_ELSK, elsk.line());
+    }
+
+    @Test
+    @DisplayName("Справочник содержит станцию Костюковка с 12-и километровым расстоянием")
+    void containsKostyukovka() {
+        Station kostyukovka = station("Костюковка");
+        assertEquals(StationType.INTERMEDIATE, kostyukovka.type());
+        assertEquals(12, kostyukovka.distanceFromGomelKm());
+    }
     // тесты новых станций и методов добавляются в конец класса
 }
