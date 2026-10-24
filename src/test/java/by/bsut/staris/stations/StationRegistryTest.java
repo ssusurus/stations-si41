@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class StationRegistryTest {
@@ -65,5 +66,35 @@ class StationRegistryTest {
         assertEquals(StationType.INTERMEDIATE, kostyukovka.type());
         assertEquals(12, kostyukovka.distanceFromGomelKm());
     }
+
+    @Test
+    @DisplayName("Расстояние между станциями одного направления не зависит от порядка")
+    void distanceBetweenUsesAbsoluteDifference() {
+        assertEquals(12, registry.distanceBetween("Гомель-Пассажирский", "Костюковка"));
+        assertEquals(12, registry.distanceBetween("Костюковка", "Гомель-Пассажирский"));
+    }
+
+    @Test
+    @DisplayName("Расстояние от станции до неё самой равно нулю")
+    void distanceBetweenSameStationIsZero() {
+        assertEquals(0, registry.distanceBetween("Гомель-Сортировочный", "Гомель-Сортировочный"));
+    }
+
+    @Test
+    @DisplayName("Неизвестная или пустая станция приводит к IllegalArgumentException")
+    void distanceBetweenRejectsUnknownStation() {
+        assertThrows(IllegalArgumentException.class,
+                () -> registry.distanceBetween("Гомель-Пассажирский", ""));
+        assertThrows(IllegalArgumentException.class,
+                () -> registry.distanceBetween("Неизвестная станция", "Костюковка"));
+    }
+
+    @Test
+    @DisplayName("Для станций разных направлений выбрасывается IllegalArgumentException")
+    void distanceBetweenRejectsDifferentLines() {
+        assertThrows(IllegalArgumentException.class,
+                () -> registry.distanceBetween("Гомель-Пассажирский", "Ельск"));
+    }
+
     // тесты новых станций и методов добавляются в конец класса
 }
