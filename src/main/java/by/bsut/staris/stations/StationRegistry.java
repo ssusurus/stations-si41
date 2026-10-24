@@ -19,4 +19,22 @@ public final class StationRegistry {
     }
 
     // новые методы добавляются в конец класса
+
+    /** Возвращает модуль разности расстояний для станций одного направления. */
+    public int distanceBetween(String a, String b) {
+        Station first = stations.stream()
+                .filter(station -> station.name().equals(a))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Неизвестная станция: " + a));
+        Station second = stations.stream()
+                .filter(station -> station.name().equals(b))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Неизвестная станция: " + b));
+
+        if (first.line() != second.line()) {
+            throw new IllegalArgumentException("Станции находятся на разных направлениях");
+        }
+
+        return Math.abs(first.distanceFromGomelKm() - second.distanceFromGomelKm());
+    }
 }
